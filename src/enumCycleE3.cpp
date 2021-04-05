@@ -7,8 +7,6 @@
 #include <string>
 #include <vector>
 
-#define UPPER_RATIO 4
-
 std::vector<std::vector<int>>
 readGraph(const std::string graph_name)
 {
@@ -52,7 +50,7 @@ backtrack(std::vector<int> curr_path,
     } else if (!(std::find(curr_path.begin(), curr_path.end(), neig) !=
                  curr_path.end()) &&
                (neig > curr_path.front())) {
-      if (neig > graph_v.size() / UPPER_RATIO) {
+      if (curr_path.front() < neig) {
         backtrack(curr_path, neig, graph_v);
       } else {
 #pragma omp task
@@ -97,12 +95,12 @@ main(int argc, char* argv[])
 
   std::chrono::steady_clock::time_point begin =
     std::chrono::steady_clock::now();
-
+  int size = graph_v.size();
   std::string n_threads;
 #pragma omp parallel
   {
 #pragma omp for schedule(dynamic)
-    for (int i = 0; i < graph_v.size(); i++) {
+    for (int i = 0; i < size; i++) {
       std::vector<int> path_init;
       backtrack(path_init, i, graph_v);
     }

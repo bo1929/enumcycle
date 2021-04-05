@@ -86,8 +86,8 @@ main(int argc, char* argv[])
 
   std::chrono::steady_clock::time_point begin =
     std::chrono::steady_clock::now();
-
-  for (int i = 0; i < graph_v.size(); i++) {
+  int size = graph_v.size();
+  for (int i = 0; i < size; i++) {
     std::vector<int> path_init;
     backtrack(path_init, i, graph_v);
   }

@@ -88,12 +88,12 @@ main(int argc, char* argv[])
 
   std::chrono::steady_clock::time_point begin =
     std::chrono::steady_clock::now();
-
+  int size = graph_v.size();
   std::string n_threads;
 #pragma omp parallel
   {
 #pragma omp for schedule(dynamic)
-    for (int i = 0; i < graph_v.size(); i++) {
+    for (int i = 0; i < size; i++) {
       std::vector<int> path_init;
       backtrack(path_init, i, graph_v);
     }
