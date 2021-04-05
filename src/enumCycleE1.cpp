@@ -99,7 +99,7 @@ main(int argc, char* argv[])
   printf("\nElapsed time is %f ms\n", elapsed_time); // or microseconds µs
 
   std::ofstream out_time;
-  out_time.open("./results/time_results/" + graph_name + "time_E1.txt",
+  out_time.open("./results/time_results/" + graph_name + "_time_E1.txt",
                 std::ios_base::app);
   out_time << elapsed_time << "\n";
 
