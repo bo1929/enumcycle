@@ -50,13 +50,9 @@ backtrack(std::vector<int> curr_path,
     } else if (!(std::find(curr_path.begin(), curr_path.end(), neig) !=
                  curr_path.end()) &&
                (neig > curr_path.front())) {
-      if (curr_path.front() < neig) {
-        backtrack(curr_path, neig, graph_v);
-      } else {
 #pragma omp task
-        {
-          backtrack(curr_path, neig, graph_v);
-        }
+      {
+        backtrack(curr_path, neig, graph_v);
       }
     }
   }
